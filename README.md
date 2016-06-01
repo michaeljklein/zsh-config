@@ -20,3 +20,6 @@ magic-enter () {
 }
 ```
 
+Also, I'm a bit red-green colorblind so forgive me if the colors in the theme look weird to you.
+I try to lessen the effects with [this](https://github.com/michaeljklein/colorblind-lcd) config, 
+but I really can't tell. 

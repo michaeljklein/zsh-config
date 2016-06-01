@@ -3,7 +3,7 @@ My Zsh `.zshrc` file
 
 Here's a screenshot of the theme:
 
-![Oh my zsh!](http://url.url)
+![Oh my zsh!](https://github.com/michaeljklein/zsh-config/blob/master/screenshot.png)
 
 Besides the theme, the only interesting thing is a convenient `magic-enter` command:
 

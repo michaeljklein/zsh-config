@@ -111,13 +111,38 @@ source $ZSH/oh-my-zsh.sh
 magic-enter () {
         if [[ -z $BUFFER ]]
         then
-#                zle clear-screen
-                zle up-history
+          if [ $num_back -eq 0 ]
+          then
+            zle up-history
+          else
+            eval "$(eval "fc -l -$num_back | sed 's/^ [0-9]*  //' | awk '{print}' ORS=' && '")true"
+            let num_back=0
+            zle accept-line
+          fi
         else
-                zle accept-line
+          zle accept-line
         fi
 }
-
 zle -N magic-enter
 bindkey "^M" magic-enter
 
+
+# number of commands back to execute
+num_back=0
+
+# tab on blank allows executing the last n commands
+function magic-tab() {
+    if [[ $#BUFFER == 0 ]]
+      then
+        if [ $num_back -eq 0 ]
+          then
+            echo "<Cr> to execute the following commands or <Tab> to fetch another command:"
+        fi
+        let num_back=num_back+1
+        echo "$(eval "fc -l -$num_back | head -n 1 | sed 's/^ [0-9]*  //'")"
+    else
+        zle expand-or-complete
+    fi
+}
+zle -N magic-tab
+bindkey '^I' magic-tab
